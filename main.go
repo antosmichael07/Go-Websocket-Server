@@ -20,7 +20,7 @@ func newServer() *Server {
 }
 
 func (s *Server) HandleWS(ws *websocket.Conn) {
-	consoleLog(fmt.Sprintf("New connection from: %s", ws.RemoteAddr()), "SERVER")
+	consoleLog(fmt.Sprintf("New connection from: \"%s\"", ws.RemoteAddr()), "SERVER")
 	s.conns[ws] = true
 	s.read(ws)
 }
@@ -29,9 +29,7 @@ func (s *Server) read(ws *websocket.Conn) {
 	buf := make([]byte, 1024)
 	charCount, _ := ws.Read(buf)
 	data := fmt.Sprintf("%s", buf[:charCount])
-	if data == "connectedToWS" {
-		consoleLog(fmt.Sprintf("Connected to websocket from: %s", ws.RemoteAddr()), "SERVER")
-	}
+	consoleLog(fmt.Sprintf("New message: \"%s\"", data), fmt.Sprintf("%s", ws.RemoteAddr()))
 }
 
 func sendHTMLServerHandler(w http.ResponseWriter, r *http.Request) {
