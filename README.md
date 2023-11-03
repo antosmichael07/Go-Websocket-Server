@@ -1,3 +1,5 @@
 # Go Websocket Server 
 
-Type `ws.send("str")` to send a string to the server.
+Listens on port 8000.
+
+Type `ws.send("str")` in javascript to send a string to the server.
